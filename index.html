@@ -1,0 +1,2025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban Street Food</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --teal-accent: #0D9488;
+            --vibrant-green: #10B981;
+            --dark-text: #F9FAFB;
+            --medium-gray: #D1D5DB;
+            --light-gray: #F3F4F6;
+            --crisp-white: #FFFFFF;
+            --off-white: #FAFAFA;
+            --border-gray: rgba(255, 255, 255, 0.1);
+            --brutalist-shadow: #0A4C4A;
+            --dark-bg: #0F0F0F;
+            --card-dark: rgba(15, 15, 15, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: url('./assets/download.jpg') center/cover fixed;
+            background-color: #0F0F0F;
+            color: var(--dark-text);
+            overflow-x: hidden;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: var(--card-dark);
+            backdrop-filter: blur(12px);
+            padding: 1.2rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-text);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Hide desktop navigation links completely */
+        .nav-links {
+            display: none !important;
+        }
+
+        /* Hamburger Menu - Always Visible */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1001;
+            gap: 6px;
+        }
+
+        .hamburger span {
+            width: 32px;
+            height: 3px;
+            background: var(--crisp-white);
+            transition: all 0.3s ease;
+            border-radius: 0;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(9px, 9px);
+            background: var(--crisp-white);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(9px, -9px);
+            background: var(--crisp-white);
+        }
+
+        /* Mobile Menu - Full Screen Overlay */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(31, 41, 55, 0.98) 0%, rgba(17, 24, 39, 0.98) 100%);
+            z-index: 1000;
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+        }
+
+        .mobile-menu ul li a {
+            color: var(--crisp-white);
+            text-decoration: none;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            font-family: 'Space Grotesk', sans-serif;
+            position: relative;
+        }
+
+        .mobile-menu ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 4px;
+            background: var(--teal-accent);
+            transition: width 0.3s;
+        }
+
+        .mobile-menu ul li a:hover {
+            color: var(--teal-accent);
+        }
+
+        .mobile-menu ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 2rem auto;
+            text-align: center;
+            background: transparent;
+            border-radius: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--dark-text);
+            line-height: 1.1;
+        }
+
+        .hero-desc {
+            color: var(--medium-gray);
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Why Choose Us Section */
+        .why-choose {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 3rem auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .why-choose h2 {
+            text-align: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--dark-text);
+        }
+
+        .why-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .why-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--card-dark);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-gray);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .why-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 4px 4px 0px var(--teal-accent);
+        }
+
+        .why-item .emoji {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .why-item h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--dark-text);
+        }
+
+        .why-item p {
+            color: var(--medium-gray);
+            line-height: 1.6;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        /* Menu Section */
+        .menu {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 3rem auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .menu h2 {
+            text-align: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 2.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--dark-text);
+        }
+
+        /* Filter Buttons */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.8rem;
+            border: 1px solid var(--border-gray);
+            background: var(--card-dark);
+            backdrop-filter: blur(12px);
+            color: var(--dark-text);
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--teal-accent);
+            color: var(--crisp-white);
+            border-color: var(--teal-accent);
+            box-shadow: 4px 4px 0px rgba(13, 148, 136, 0.3);
+        }
+
+        /* Menu Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        /* Menu Card - Dark Glassmorphism Style */
+        .menu-card {
+            background: var(--card-dark);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-gray);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            opacity: 1;
+            position: relative;
+            border-radius: 8px;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 6px 6px 0px var(--teal-accent);
+        }
+
+        .menu-card.hide {
+            opacity: 0;
+            transform: scale(0.8);
+            position: absolute;
+            pointer-events: none;
+        }
+
+        /* Menu Image */
+        .menu-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .menu-card-content {
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .menu-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--dark-text);
+        }
+
+        .menu-card p {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .menu-card .price {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark-text);
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 3rem auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-section h2 {
+            text-align: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--dark-text);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Contact Card - Dark Glassmorphism Style */
+        .contact-card {
+            background: var(--card-dark);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-gray);
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 6px 6px 0px var(--teal-accent);
+        }
+
+        .contact-card .icon {
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contact-card .icon svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .contact-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--dark-text);
+        }
+
+        .contact-card p {
+            color: var(--medium-gray);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            font-weight: 600;
+        }
+
+        .contact-card a {
+            color: var(--teal-accent);
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .contact-card a:hover {
+            color: var(--dark-text);
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .whatsapp-btn,
+        .tiktok-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 2.5rem;
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            border-radius: 4px;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 4px 4px 0px #128C7E;
+        }
+
+        .tiktok-btn {
+            background: #000000;
+        }
+
+        .tiktok-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 4px 4px 0px #EE1D52;
+        }
+
+        .whatsapp-btn svg,
+        .tiktok-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--card-dark);
+            backdrop-filter: blur(12px);
+            color: var(--dark-text);
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-gray);
+            position: relative;
+            z-index: 2;
+        }
+
+        footer p {
+            color: var(--medium-gray);
+            font-weight: 500;
+            line-height: 2;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Shopping Cart Styles */
+        .cart-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--teal-accent);
+            color: var(--crisp-white);
+            border: none;
+            padding: 1.2rem 1.8rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .cart-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 4px 4px 0px var(--brutalist-shadow);
+        }
+
+        .cart-badge {
+            background: white;
+            color: var(--teal-accent);
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        /* Cart Side Panel */
+        .cart-panel {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 450px;
+            height: 100vh;
+            background: var(--card-dark);
+            backdrop-filter: blur(12px);
+            border-left: 1px solid var(--border-gray);
+            z-index: 1001;
+            transition: right 0.4s ease;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .cart-panel.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-gray);
+            position: relative;
+            z-index: 2;
+        }
+
+        .cart-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            color: var(--dark-text);
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .close-cart {
+            background: transparent;
+            border: 1px solid var(--border-gray);
+            color: var(--crisp-white);
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-cart:hover {
+            background: var(--teal-accent);
+            border-color: var(--teal-accent);
+            color: var(--crisp-white);
+        }
+
+        .cart-items {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 2rem;
+        }
+
+        .cart-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-gray);
+            border-radius: 4px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+        }
+
+        .cart-item:hover {
+            box-shadow: 2px 2px 0px var(--teal-accent);
+        }
+
+        .cart-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 0.8rem;
+        }
+
+        .cart-item-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            color: var(--dark-text);
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+
+        .remove-item {
+            background: transparent;
+            border: none;
+            color: #EF4444;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .remove-item:hover {
+            transform: scale(1.2);
+        }
+
+        .cart-item-details {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cart-item-price {
+            color: var(--teal-accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--medium-gray);
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cart-empty-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .cart-total {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-gray);
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cart-total-label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            color: var(--dark-text);
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .cart-total-amount {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            color: var(--dark-text);
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1.3rem;
+            background: #25D366;
+            border: none;
+            color: var(--crisp-white);
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 4px 4px 0px #128C7E;
+        }
+
+        .checkout-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Add to Order Button */
+        .add-to-order-btn {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: var(--teal-accent);
+            border: none;
+            color: var(--crisp-white);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+            margin-top: 1rem;
+            border-radius: 4px;
+        }
+
+        .add-to-order-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 4px 4px 0px var(--brutalist-shadow);
+        }
+
+        /* Size Selection */
+        .size-selection {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .size-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-gray);
+            color: var(--medium-gray);
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 4px;
+        }
+
+        .size-btn:hover {
+            border-color: var(--teal-accent);
+            color: var(--teal-accent);
+        }
+
+        .size-btn.active {
+            background: var(--teal-accent);
+            border-color: var(--teal-accent);
+            color: var(--crisp-white);
+        }
+
+        /* Customization Modal Styles */
+        .customization-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .customization-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--card-dark);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideUp 0.3s ease;
+        }
+
+        @keyframes modalSlideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: var(--card-dark);
+            backdrop-filter: blur(12px);
+            z-index: 10;
+        }
+
+        .modal-header h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--dark-text);
+        }
+
+        .modal-close {
+            background: transparent;
+            border: 1px solid var(--border-gray);
+            color: var(--crisp-white);
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .modal-close:hover {
+            background: var(--teal-accent);
+            border-color: var(--teal-accent);
+            color: var(--crisp-white);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-item-info {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        .modal-item-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--dark-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-item-price {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--teal-accent);
+        }
+
+        .modal-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--dark-text);
+            margin-bottom: 1rem;
+        }
+
+        /* Quantity Stepper */
+        .quantity-stepper {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .quantity-btn {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-gray);
+            color: var(--crisp-white);
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-btn:hover:not(:disabled) {
+            background: var(--teal-accent);
+            border-color: var(--teal-accent);
+            color: var(--crisp-white);
+        }
+
+        .quantity-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .quantity-display {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-text);
+            min-width: 50px;
+            text-align: center;
+            border: 1px solid var(--border-gray);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        /* Add-ons Section */
+        .addons-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .addon-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem;
+            border: 1px solid var(--border-gray);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .addon-item:hover {
+            border-color: var(--teal-accent);
+            box-shadow: 2px 2px 0px var(--teal-accent);
+        }
+
+        .addon-item.checked {
+            border-color: var(--teal-accent);
+            background: rgba(13, 148, 136, 0.05);
+        }
+
+        .addon-checkbox {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--border-gray);
+            border-radius: 4px;
+            cursor: pointer;
+            flex-shrink: 0;
+            accent-color: var(--teal-accent);
+        }
+
+        .addon-label {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .addon-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--dark-text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .addon-price {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--teal-accent);
+        }
+
+        /* Modal Footer */
+        .modal-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-gray);
+            position: sticky;
+            bottom: 0;
+            background: var(--card-dark);
+            backdrop-filter: blur(12px);
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 1.3rem;
+            background: var(--teal-accent);
+            border: none;
+            color: var(--crisp-white);
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .add-to-cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 4px 4px 0px var(--brutalist-shadow);
+        }
+
+        /* Added Feedback Animation */
+        @keyframes addedPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .add-to-cart-btn.added {
+            background: #25D366;
+            animation: addedPulse 0.5s ease;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .cart-panel {
+                width: 100%;
+                right: -100%;
+            }
+
+            .cart-button {
+                bottom: 20px;
+                right: 20px;
+                padding: 1rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+                letter-spacing: 2px;
+            }
+
+            .hero-desc {
+                font-size: 1rem;
+            }
+
+            .why-choose h2,
+            .menu h2,
+            .contact-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .filter-buttons {
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.85rem;
+            }
+
+            .why-items {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .whatsapp-btn,
+            .tiktok-btn {
+                justify-content: center;
+            }
+
+            .mobile-menu ul li a {
+                font-size: 2rem;
+            }
+
+            .modal-content {
+                max-height: 95vh;
+                border-radius: 8px 8px 0 0;
+            }
+
+            .modal-header h3 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">URBAN EATS</div>
+            
+            <!-- Desktop Navigation Links - HIDDEN -->
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#why-us">Why Us</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#contact">Get in Touch</a></li>
+            </ul>
+
+            <!-- Hamburger Menu Icon - ALWAYS VISIBLE -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#home" class="mobile-link">Home</a></li>
+            <li><a href="#why-us" class="mobile-link">Why Us</a></li>
+            <li><a href="#menu" class="mobile-link">Menu</a></li>
+            <li><a href="#contact" class="mobile-link">Get in Touch</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>STREET FOOD<br>REVOLUTION</h1>
+        <p class="hero-desc">Premium Basmati • Chinese Rice • Peppered Proteins<br>Bold Flavors • Urban Soul • Street Culture</p>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose" id="why-us">
+        <h2>WHY WE'RE DIFFERENT</h2>
+        <div class="why-items">
+            <div class="why-item">
+                <div class="emoji">🌾</div>
+                <h3>Premium Ingredients</h3>
+                <p>ONLY THE FINEST BASMATI RICE, FRESH VEGETABLES, AND QUALITY PROTEINS FROM TRUSTED SUPPLIERS. NO COMPROMISES.</p>
+            </div>
+            <div class="why-item">
+                <div class="emoji">🔥</div>
+                <h3>Bold Urban Flavors</h3>
+                <p>SIGNATURE PEPPERED PROTEINS AND AUTHENTIC STREET RECIPES THAT DELIVER INTENSE, SOUL-SATISFYING TASTE.</p>
+            </div>
+            <div class="why-item">
+                <div class="emoji">📦</div>
+                <h3>Perfect Portions</h3>
+                <p>SMALL, MEDIUM, OR LARGE PACKS DESIGNED TO SATISFY YOUR APPETITE. SOLO OR SHARING WITH THE CREW.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <h2>THE MENU</h2>
+        
+        <!-- Filter Buttons -->
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">ALL</button>
+            <button class="filter-btn" data-filter="meals">MEALS</button>
+            <button class="filter-btn" data-filter="premium-rice">PREMIUM RICE</button>
+            <button class="filter-btn" data-filter="proteins">PROTEINS</button>
+            <button class="filter-btn" data-filter="sides">SIDES</button>
+        </div>
+
+        <!-- Menu Grid -->
+        <div class="menu-grid">
+            <!-- Meals (Standard Packs) -->
+            <div class="menu-card" data-category="meals" data-name="Jollof Rice" data-prices='{"Small":2000,"Medium":3000,"Large":4000}'>
+                <img src="./assets/Jollof Rice.jpg" alt="Jollof Rice" class="menu-image">
+                <div class="menu-card-content">
+                    <h3>Jollof Rice</h3>
+                    <p>Classic Nigerian jollof rice with rich tomato flavor and aromatic spices</p>
+                    <div class="price">SMALL: ₦2,000 | MEDIUM: ₦3,000 | LARGE: ₦4,000</div>
+                    <div class="size-selection">
+                        <button class="size-btn active" data-size="Small">Small</button>
+                        <button class="size-btn" data-size="Medium">Medium</button>
+                        <button class="size-btn" data-size="Large">Large</button>
+                    </div>
+                    <button class="add-to-order-btn">Add to Order</button>
+                </div>
+            </div>
+
+            <div class="menu-card" data-category="meals" data-name="Native Rice" data-prices='{"Small":2000,"Medium":3000,"Large":4000}'>
+                <img src="./assets/Native rice.jpg" alt="Native Rice" class="menu-image">
+                <div class="menu-card-content">
+                    <h3>Native Rice</h3>
+                    <p>Traditional palm oil rice with authentic local spices and herbs</p>
+                    <div class="price">SMALL: ₦2,000 | MEDIUM: ₦3,000 | LARGE: ₦4,000</div>
+                    <div class="size-selection">
+                        <button class="size-btn active" data-size="Small">Small</button>
+                        <button class="size-btn" data-size="Medium">Medium</button>
+                        <button class="size-btn" data-size="Large">Large</button>
+                    </div>
+                    <button class="add-to-order-btn">Add to Order</button>
+                </div>
+            </div>
+
+            <div class="menu-card" data-category="meals" data-name="Coconut Rice" data-prices='{"Small":2000,"Medium":3000,"Large":4000}'>
+                <img src="./assets/Fried rice.jpg" alt="Coconut Rice" class="menu-image">
+                <div class="menu-card-content">
+                    <h3>Coconut Rice</h3>
+                    <p>Fragrant rice cooked in creamy coconut milk with subtle sweetness</p>
+                    <div class="price">SMALL: ₦2,000 | MEDIUM: ₦3,000 | LARGE: ₦4,000</div>
+                    <div class="size-selection">
+                        <button class="size-btn active" data-size="Small">Small</button>
+                        <button class="size-btn" data-size="Medium">Medium</button>
+                        <button class="size-btn" data-size="Large">Large</button>
+                    </div>
+                    <button class="add-to-order-btn">Add to Order</button>
+                </div>
+            </div>
+
+            <div class="menu-card" data-category="meals" data-name="Spaghetti" data-prices='{"Small":2000,"Medium":3000,"Large":4000}'>
+                <img src="./assets/Stir fry spaghetti.jpg" alt="Spaghetti" class="menu-image">
+                <div class="menu-card-content">
+                    <h3>Spaghetti</h3>
+                    <p>Perfectly cooked spaghetti with savory tomato sauce and vegetables</p>
+                    <div class="price">SMALL: ₦2,000 | MEDIUM: ₦3,000 | LARGE: ₦4,000</div>
+                    <div class="size-selection">
+                        <button class="size-btn active" data-size="Small">Small</button>
+                        <button class="size-btn" data-size="Medium">Medium</button>
+                        <button class="size-btn" data-size="Large">Large</button>
+                    </div>
+                    <button class="add-to-order-btn">Add to Order</button>
+                </div>
+            </div>
+
+            <!-- Premium Rice Options -->
+            <div class="menu-card" data-category="premium-rice" data-name="Basmati Fried Rice" data-prices='{"Small":3000,"Medium":4500,"Large":6000}'>
+                <img src="./assets/Basmati Fried Rice.jpg" alt="Basmati Fried Rice" class="menu-image">
+                <div class="menu-card-content">
+                    <h3>Basmati Fried Rice</h3>
+                    <p>Premium long-grain Basmati rice stir-fried with fresh vegetables, eggs, and aromatic seasonings</p>
+                    <div class="price">SMALL: ₦3,000 | MEDIUM: ₦4,500 | LARGE: ₦6,000</div>
+                    <div class="size-selection">
+                        <button class="size-btn active" data-size="Small">Small</button>
+                        <button class="size-btn" data-size="Medium">Medium</button>
+                        <button class="size-btn" data-size="Large">Large</button>
+                    </div>
+                    <button class="add-to-order-btn">Add to Order</button>
+                </div>
+            </div>
+
+            <div class="menu-card" data-category="premium-rice" data-name="Chinese Rice" data-prices='{"Small":4000,"Medium":6000,"Large":8000}'>
+                <img src="./assets/Chinese Rice.jpg" alt="Chinese Rice" class="menu-image">
+                <div class="menu-card-content">
+                    <h3>Chinese Rice</h3>
+                    <p>Authentic Chinese-style fried rice with premium ingredients and traditional wok flavor</p>
+                    <div class="price">SMALL: ₦4,000 | MEDIUM: ₦6,000 | LARGE: ₦8,000</div>
+                    <div class="size-selection">
+                        <button class="size-btn active" data-size="Small">Small</button>
+                        <button class="size-btn" data-size="Medium">Medium</button>
+                        <button class="size-btn" data-size="Large">Large</button>
+                    </div>
+                    <button class="add-to-order-btn">Add to Order</button>
+                </div>
+            </div>
+
+            <!-- Protein Add-ons -->
+            <div class="menu-card" data-category="proteins" data-name="Peppered Turkey" data-prices='{"Standard":6000}'>
+                <img src="./assets/Peppered turkey.jpg" alt="Peppered Turkey" class="menu-image">
+                <div class="menu-card-content">
+                    <h3>Peppered Turkey</h3>
+                    <p>Succulent turkey pieces in our signature spicy pepper sauce - per portion</p>
+                    <div class="price">₦6,000</div>
+                    <button class="add-to-order-btn">Add to Order</button>
+                </div>
+            </div>
+
+            <div class="menu-card" data-category="proteins" data-name="Peppered Chicken" data-prices='{"Standard":4000}'>
+                <img src="./assets/Peppered Chicken.jpg" alt="Peppered Chicken" class="menu-image">
+                <div class="menu-card-content">
+                    <h3>Peppered Chicken</h3>
+                    <p>Tender chicken in bold, fiery pepper sauce - per portion</p>
+                    <div class="price">₦4,000</div>
+                    <button class="add-to-order-btn">Add to Order</button>
+                </div>
+            </div>
+
+            <div class="menu-card" data-category="proteins" data-name="Fried Fish" data-prices='{"Standard":3000}'>
+                <img src="./assets/Fried Fish.jpg" alt="Fried Fish" class="menu-image">
+                <div class="menu-card-content">
+                    <h3>Fried Fish</h3>
+                    <p>Crispy golden fried fish, perfectly seasoned - per portion</p>
+                    <div class="price">₦3,000</div>
+                    <button class="add-to-order-btn">Add to Order</button>
+                </div>
+            </div>
+
+            <div class="menu-card" data-category="proteins" data-name="Goat Meat" data-prices='{"Standard":1500}'>
+                <img src="./assets/Goat Meat.jpg" alt="Goat Meat" class="menu-image">
+                <div class="menu-card-content">
+                    <h3>Goat Meat</h3>
+                    <p>Tender, well-seasoned goat meat - per portion</p>
+                    <div class="price">₦1,500</div>
+                    <button class="add-to-order-btn">Add to Order</button>
+                </div>
+            </div>
+
+            <!-- Sides -->
+            <div class="menu-card" data-category="sides" data-name="Plantain" data-prices='{"Standard":1000}'>
+                <img src="./assets/Fried Plantain.jpg" alt="Plantain" class="menu-image">
+                <div class="menu-card-content">
+                    <h3>Plantain</h3>
+                    <p>Sweet fried plantain, perfectly caramelized</p>
+                    <div class="price">₦1,000</div>
+                    <button class="add-to-order-btn">Add to Order</button>
+                </div>
+            </div>
+
+            <div class="menu-card" data-category="sides" data-name="Salad" data-prices='{"Standard":1000}'>
+                <img src="./assets/Salad.jpg" alt="Salad" class="menu-image">
+                <div class="menu-card-content">
+                    <h3>Salad</h3>
+                    <p>Fresh garden salad with crisp vegetables</p>
+                    <div class="price">₦1,000</div>
+                    <button class="add-to-order-btn">Add to Order</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <h2>HIT US UP</h2>
+        
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="#25D366">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                </div>
+                <h3>WhatsApp</h3>
+                <p><a href="https://wa.me/2349079779557?text=Hello%20Urban%20Street%20Food,%20I%20would%20like%20to%20place%20an%20order!">09079779557</a></p>
+            </div>
+
+            <div class="contact-card">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="#000000">
+                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                    </svg>
+                </div>
+                <h3>TikTok</h3>
+                <p><a href="https://tiktok.com/@urbanstreetfood_ng" target="_blank">@urbanstreetfood_ng</a></p>
+            </div>
+
+            <div class="contact-card">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="#0D9488">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                </div>
+                <h3>Location</h3>
+                <p>PORT HARCOURT, RIVERS</p>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="https://wa.me/2349079779557?text=Hello%20Urban%20Street%20Food,%20I%20would%20like%20to%20place%20an%20order!" class="whatsapp-btn" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                Order on WhatsApp
+            </a>
+
+            <a href="https://tiktok.com/@urbanstreetfood_ng" class="tiktok-btn" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                </svg>
+                Follow on TikTok
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 URBAN STREET FOOD. ALL RIGHTS RESERVED.</p>
+        <p>BRINGING YOU THE ULTIMATE STREET FOOD EXPERIENCE WITH FLAVOR AND SOUL.</p>
+    </footer>
+
+    <!-- Shopping Cart Button -->
+    <button class="cart-button" id="cartButton">
+        View Order
+        <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+
+    <!-- Customization Modal -->
+    <div class="customization-modal" id="customizationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalItemName">Customize Your Order</h3>
+                <button class="modal-close" id="modalClose">✕</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Item Info -->
+                <div class="modal-item-info">
+                    <div class="modal-item-name" id="modalItemNameDisplay"></div>
+                    <div class="modal-item-price" id="modalBasePrice"></div>
+                </div>
+                
+                <!-- Quantity Section -->
+                <div class="modal-section">
+                    <div class="modal-section-title">Quantity</div>
+                    <div class="quantity-stepper">
+                        <button class="quantity-btn" id="decreaseQty">−</button>
+                        <div class="quantity-display" id="quantityDisplay">1</div>
+                        <button class="quantity-btn" id="increaseQty">+</button>
+                    </div>
+                </div>
+                
+                <!-- Add-ons Section -->
+                <div class="modal-section">
+                    <div class="modal-section-title">Add Extras</div>
+                    <div class="addons-list" id="addonsList">
+                        <!-- Proteins -->
+                        <div class="addon-item" data-addon="Peppered Turkey" data-price="6000">
+                            <input type="checkbox" class="addon-checkbox" id="addon-turkey">
+                            <label class="addon-label" for="addon-turkey">
+                                <span class="addon-name">Peppered Turkey</span>
+                                <span class="addon-price">₦6,000</span>
+                            </label>
+                        </div>
+                        
+                        <div class="addon-item" data-addon="Peppered Chicken" data-price="4000">
+                            <input type="checkbox" class="addon-checkbox" id="addon-chicken">
+                            <label class="addon-label" for="addon-chicken">
+                                <span class="addon-name">Peppered Chicken</span>
+                                <span class="addon-price">₦4,000</span>
+                            </label>
+                        </div>
+                        
+                        <div class="addon-item" data-addon="Fried Fish" data-price="3000">
+                            <input type="checkbox" class="addon-checkbox" id="addon-fish">
+                            <label class="addon-label" for="addon-fish">
+                                <span class="addon-name">Fried Fish</span>
+                                <span class="addon-price">₦3,000</span>
+                            </label>
+                        </div>
+                        
+                        <div class="addon-item" data-addon="Goat Meat" data-price="1500">
+                            <input type="checkbox" class="addon-checkbox" id="addon-goat">
+                            <label class="addon-label" for="addon-goat">
+                                <span class="addon-name">Goat Meat</span>
+                                <span class="addon-price">₦1,500</span>
+                            </label>
+                        </div>
+                        
+                        <!-- Sides -->
+                        <div class="addon-item" data-addon="Plantain" data-price="1000">
+                            <input type="checkbox" class="addon-checkbox" id="addon-plantain">
+                            <label class="addon-label" for="addon-plantain">
+                                <span class="addon-name">Plantain</span>
+                                <span class="addon-price">₦1,000</span>
+                            </label>
+                        </div>
+                        
+                        <div class="addon-item" data-addon="Salad" data-price="1000">
+                            <input type="checkbox" class="addon-checkbox" id="addon-salad">
+                            <label class="addon-label" for="addon-salad">
+                                <span class="addon-name">Salad</span>
+                                <span class="addon-price">₦1,000</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="add-to-cart-btn" id="addToCartBtn">Add to Cart - ₦0</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Side Panel -->
+    <div class="cart-panel" id="cartPanel">
+        <div class="cart-header">
+            <h2>Your Order</h2>
+            <button class="close-cart" id="closeCart">✕</button>
+        </div>
+        
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">
+                <div class="cart-empty-icon">🛒</div>
+                <p>Your cart is empty<br>Add some delicious items!</p>
+            </div>
+        </div>
+        
+        <div class="cart-total" id="cartTotalSection" style="display: none;">
+            <div class="cart-total-label">Total Amount:</div>
+            <div class="cart-total-amount" id="cartTotal">₦0</div>
+        </div>
+        
+        <button class="checkout-btn" id="checkoutBtn" disabled>
+            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+            Checkout via WhatsApp
+        </button>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Get elements
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        // Toggle mobile menu
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            
+            // Prevent body scroll when menu is open
+            if (mobileMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close menu when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Close menu when clicking outside
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // ===== MENU FILTER FUNCTIONALITY =====
+        
+        // Get filter buttons and menu cards
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const menuCards = document.querySelectorAll('.menu-card');
+
+        // Add click event to each filter button
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Get the filter value
+                const filterValue = button.getAttribute('data-filter');
+                
+                // Filter menu cards with smooth transition
+                menuCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    
+                    if (filterValue === 'all' || cardCategory === filterValue) {
+                        // Show card with fade-in effect
+                        card.classList.remove('hide');
+                    } else {
+                        // Hide card with fade-out effect
+                        card.classList.add('hide');
+                    }
+                });
+            });
+        });
+
+        // ===== SHOPPING CART FUNCTIONALITY =====
+        
+        // Cart state
+        let cart = [];
+        
+        // Get cart elements
+        const cartButton = document.getElementById('cartButton');
+        const cartPanel = document.getElementById('cartPanel');
+        const closeCart = document.getElementById('closeCart');
+        const cartBadge = document.getElementById('cartBadge');
+        const cartItems = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
+        const cartTotalSection = document.getElementById('cartTotalSection');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        
+        // Size selection functionality
+        menuCards.forEach(card => {
+            const sizeButtons = card.querySelectorAll('.size-btn');
+            
+            sizeButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all size buttons in this card
+                    sizeButtons.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked button
+                    btn.classList.add('active');
+                });
+            });
+        });
+        
+        // ===== CUSTOMIZATION MODAL FUNCTIONALITY =====
+        
+        // Get modal elements
+        const customizationModal = document.getElementById('customizationModal');
+        const modalClose = document.getElementById('modalClose');
+        const modalItemNameDisplay = document.getElementById('modalItemNameDisplay');
+        const modalBasePrice = document.getElementById('modalBasePrice');
+        const quantityDisplay = document.getElementById('quantityDisplay');
+        const decreaseQtyBtn = document.getElementById('decreaseQty');
+        const increaseQtyBtn = document.getElementById('increaseQty');
+        const addToCartBtn = document.getElementById('addToCartBtn');
+        const addonCheckboxes = document.querySelectorAll('.addon-checkbox');
+        const addonItems = document.querySelectorAll('.addon-item');
+        
+        // Modal state
+        let currentItem = null;
+        let currentQuantity = 1;
+        let selectedAddons = [];
+        
+        // Open modal when "Add to Order" is clicked
+        const addToOrderButtons = document.querySelectorAll('.add-to-order-btn');
+        
+        addToOrderButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const card = button.closest('.menu-card');
+                const itemName = card.getAttribute('data-name');
+                const pricesData = JSON.parse(card.getAttribute('data-prices'));
+                
+                // Get selected size (if applicable)
+                const activeSizeBtn = card.querySelector('.size-btn.active');
+                const size = activeSizeBtn ? activeSizeBtn.getAttribute('data-size') : 'Standard';
+                
+                // Get price for selected size
+                const basePrice = pricesData[size];
+                
+                // Set current item
+                currentItem = {
+                    name: itemName,
+                    size: size,
+                    basePrice: basePrice
+                };
+                
+                // Reset modal state
+                currentQuantity = 1;
+                selectedAddons = [];
+                
+                // Update modal display
+                modalItemNameDisplay.textContent = itemName;
+                modalBasePrice.textContent = `Base Price: ₦${basePrice.toLocaleString()} ${size !== 'Standard' ? `(${size})` : ''}`;
+                quantityDisplay.textContent = currentQuantity;
+                
+                // Reset all checkboxes
+                addonCheckboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+                addonItems.forEach(item => {
+                    item.classList.remove('checked');
+                });
+                
+                // Update total
+                updateModalTotal();
+                
+                // Show modal
+                customizationModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        // Close modal
+        function closeModal() {
+            customizationModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        modalClose.addEventListener('click', closeModal);
+        
+        // Close modal when clicking outside
+        customizationModal.addEventListener('click', (e) => {
+            if (e.target === customizationModal) {
+                closeModal();
+            }
+        });
+        
+        // Quantity stepper functionality
+        decreaseQtyBtn.addEventListener('click', () => {
+            if (currentQuantity > 1) {
+                currentQuantity--;
+                quantityDisplay.textContent = currentQuantity;
+                updateModalTotal();
+            }
+        });
+        
+        increaseQtyBtn.addEventListener('click', () => {
+            currentQuantity++;
+            quantityDisplay.textContent = currentQuantity;
+            updateModalTotal();
+        });
+        
+        // Update decrease button state
+        function updateQuantityButtons() {
+            decreaseQtyBtn.disabled = currentQuantity <= 1;
+        }
+        
+        // Add-ons checkbox functionality
+        addonCheckboxes.forEach((checkbox, index) => {
+            checkbox.addEventListener('change', () => {
+                const addonItem = addonItems[index];
+                const addonName = addonItem.getAttribute('data-addon');
+                const addonPrice = parseInt(addonItem.getAttribute('data-price'));
+                
+                if (checkbox.checked) {
+                    addonItem.classList.add('checked');
+                    selectedAddons.push({ name: addonName, price: addonPrice });
+                } else {
+                    addonItem.classList.remove('checked');
+                    selectedAddons = selectedAddons.filter(addon => addon.name !== addonName);
+                }
+                
+                updateModalTotal();
+            });
+            
+            // Also toggle on item click
+            addonItems[index].addEventListener('click', (e) => {
+                if (e.target !== checkbox && e.target.tagName !== 'LABEL') {
+                    checkbox.checked = !checkbox.checked;
+                    checkbox.dispatchEvent(new Event('change'));
+                }
+            });
+        });
+        
+        // Update modal total
+        function updateModalTotal() {
+            updateQuantityButtons();
+            
+            // Calculate base total (base price * quantity)
+            const baseTotal = currentItem.basePrice * currentQuantity;
+            
+            // Calculate addons total
+            const addonsTotal = selectedAddons.reduce((sum, addon) => sum + addon.price, 0);
+            
+            // Grand total
+            const grandTotal = baseTotal + addonsTotal;
+            
+            // Update button text
+            addToCartBtn.textContent = `Add to Cart - ₦${grandTotal.toLocaleString()}`;
+        }
+        
+        // Add to cart from modal
+        addToCartBtn.addEventListener('click', () => {
+            if (!currentItem) return;
+            
+            // Calculate total price
+            const baseTotal = currentItem.basePrice * currentQuantity;
+            const addonsTotal = selectedAddons.reduce((sum, addon) => sum + addon.price, 0);
+            const totalPrice = baseTotal + addonsTotal;
+            
+            // Create detailed cart item
+            const cartItem = {
+                id: Date.now(),
+                name: currentItem.name,
+                size: currentItem.size,
+                basePrice: currentItem.basePrice,
+                quantity: currentQuantity,
+                addons: [...selectedAddons],
+                price: totalPrice
+            };
+            
+            // Add to cart
+            cart.push(cartItem);
+            
+            // Update cart UI
+            updateCart();
+            
+            // Show feedback animation
+            addToCartBtn.classList.add('added');
+            addToCartBtn.textContent = '✓ Added to Cart!';
+            
+            setTimeout(() => {
+                addToCartBtn.classList.remove('added');
+                closeModal();
+            }, 800);
+        });
+        
+        // Update cart display
+        function updateCart() {
+            // Update badge
+            cartBadge.textContent = cart.length;
+            
+            // Clear cart items display
+            cartItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                // Show empty cart message
+                cartItems.innerHTML = `
+                    <div class="cart-empty">
+                        <div class="cart-empty-icon">🛒</div>
+                        <p>Your cart is empty<br>Add some delicious items!</p>
+                    </div>
+                `;
+                cartTotalSection.style.display = 'none';
+                checkoutBtn.disabled = true;
+            } else {
+                // Display cart items
+                cart.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'cart-item';
+                    
+                    // Build details string
+                    let detailsHTML = '';
+                    
+                    // Add size info
+                    if (item.size !== 'Standard') {
+                        detailsHTML += `Size: ${item.size}<br>`;
+                    }
+                    
+                    // Add quantity if more than 1
+                    if (item.quantity && item.quantity > 1) {
+                        detailsHTML += `Quantity: ${item.quantity}<br>`;
+                    }
+                    
+                    // Add addons if any
+                    if (item.addons && item.addons.length > 0) {
+                        const addonNames = item.addons.map(addon => addon.name).join(', ');
+                        detailsHTML += `Extras: ${addonNames}`;
+                    }
+                    
+                    // If no details, show default
+                    if (!detailsHTML) {
+                        detailsHTML = 'Per Portion';
+                    }
+                    
+                    itemElement.innerHTML = `
+                        <div class="cart-item-header">
+                            <div class="cart-item-name">${item.name}</div>
+                            <button class="remove-item" data-id="${item.id}">✕</button>
+                        </div>
+                        <div class="cart-item-details">
+                            ${detailsHTML}
+                        </div>
+                        <div class="cart-item-price">₦${item.price.toLocaleString()}</div>
+                    `;
+                    cartItems.appendChild(itemElement);
+                });
+                
+                // Add remove functionality
+                const removeButtons = document.querySelectorAll('.remove-item');
+                removeButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const itemId = parseInt(btn.getAttribute('data-id'));
+                        cart = cart.filter(item => item.id !== itemId);
+                        updateCart();
+                    });
+                });
+                
+                // Calculate and display total
+                const total = cart.reduce((sum, item) => sum + item.price, 0);
+                cartTotal.textContent = `₦${total.toLocaleString()}`;
+                cartTotalSection.style.display = 'block';
+                checkoutBtn.disabled = false;
+            }
+        }
+        
+        // Open cart panel
+        cartButton.addEventListener('click', () => {
+            cartPanel.classList.add('active');
+        });
+        
+        // Close cart panel
+        closeCart.addEventListener('click', () => {
+            cartPanel.classList.remove('active');
+        });
+        
+        // WhatsApp checkout functionality
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) return;
+            
+            // Format order message
+            let message = 'New Order from Website:%0A%0A';
+            
+            cart.forEach((item, index) => {
+                const sizeInfo = item.size !== 'Standard' ? ` (${item.size})` : '';
+                message += `${index + 1}. ${item.name}${sizeInfo} - ₦${item.price.toLocaleString()}%0A`;
+            });
+            
+            // Calculate total
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            message += `%0ATotal: ₦${total.toLocaleString()}`;
+            
+            // WhatsApp URL
+            const whatsappURL = `https://wa.me/2349079779557?text=${message}`;
+            
+            // Open in new tab
+            window.open(whatsappURL, '_blank');
+        });
+        
+        // Initialize cart
+        updateCart();
+    </script>
+</body>
+</html>
